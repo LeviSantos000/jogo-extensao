@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Jogo</title>
+</head>
+<body>
+    <div id="game-background">
+
+        <div id="overlay"></div>
+        <div id="botao-jogar" onclick="iniciarJogo()">Jogar</div>
+
+        <p id="tempo">60</p>
+
+        <p id="texto-problema">
+            Problema na memória <strong>RAM</strong>
+        </p>
+        <img src="img/monitor_gabinete.jpg" id="monitor-gabinete" alt="Monitor e Gabinete" onclick="abrirGabinete()">
+
+        <img src="img/gabinete_aberto.png" id="gabinete-aberto" alt="Gabinete Aberto" onclick="fecharGabinete()">
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

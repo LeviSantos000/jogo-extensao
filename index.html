@@ -7,22 +7,33 @@
     <title>Jogo</title>
 </head>
 <body>
+
     <div id="game-background">
+        <p id="pontuacao">Pontuação: 0</p>
+        <p id="tempo">Tempo: 60</p>
 
         <div id="overlay"></div>
         <div id="botao-jogar" onclick="iniciarJogo()">Jogar</div>
 
-        <p id="tempo">60</p>
-
         <p id="texto-problema">
-            Problema na memória <strong>RAM</strong>
+            
         </p>
-        <img src="./monitor_gabinete.jpg" id="monitor-gabinete" alt="Monitor e Gabinete" onclick="abrirGabinete()">
+        <div id="hardware-background">
+            <img src="monitor.png" alt="Monitor" id="monitor">
 
-        <img src="gabinete_aberto.png" id="gabinete-aberto" alt="Gabinete Aberto" onclick="fecharGabinete()">
+            <img src="./gabinete.png" alt="Gabinete" id="gabinete" onclick="abrirGabinete()">
+
+            <img src="gabinete_aberto.png" id="gabinete-aberto" alt="Gabinete Aberto" onclick="fecharGabinete()">
+        </div>
+        
 
     </div>
     
+    <div id="game-over">
+        <p>Obrigado por Jogar!</p>
+        <p>Pontuação Final: </p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

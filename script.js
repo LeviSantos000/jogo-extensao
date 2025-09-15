@@ -1,34 +1,60 @@
 // DOM
+const gameBackground = document.querySelector("#game-background")
 const botaojogo = document.querySelector("#botao-jogar")
 const overlay = document.querySelector("#overlay")
-const monitorgabinete = document.querySelector("#monitor-gabinete")
+const monitor = document.querySelector("#monitor")
+const gabinete = document.querySelector("#gabinete")
 const gabineteAberto = document.querySelector("#gabinete-aberto")
+const pontuacao = document.querySelector("#pontuacao")
 const timer = document.querySelector("#tempo")
 const texto = document.querySelector("#texto-problema")
+const gameOver = document.querySelector("#game-over")
+
+// Randomização de Problemas
+var erros = [
+    "Memória RAM",
+    "Fonte de Alimentação",
+    "Superaquecimento",
+    "HD falhando",
+    "Placa Mãe falhando",
+    "Placa de Vídeo falhando"
+]
+
+const indiceAleatorio = Math.floor(Math.random() * erros.length)
+const erroEscolhido = erros[indiceAleatorio]
+texto.textContent = erroEscolhido
+
+// Funções e DOM Events
 
 let tempo = 60
 
 function iniciarTempo() {
     if (tempo != 0) {
         tempo--
-        timer.textContent = tempo
+        timer.textContent = "Tempo: " + tempo
+    } else {
+        gameOver.style.display = "block"
+        gameBackground.style.display = "none"
     }
 }
 
 function iniciarJogo() {
     botaojogo.style.display = "none"
     overlay.style.display = "none"
-    monitorgabinete.style.display = "block"
+    gabinete.style.display = "block"
+    monitor.style.display = "block"
     texto.style.display = "block"
+    pontuacao.style.display = "block"
     timer.style.display = "block"
     setInterval(iniciarTempo, 1000)
 }
 
 function abrirGabinete() {
-    monitorgabinete.style.display = "none"
+    gabinete.style.display = "none"
+    monitor.style.display = "none"
     gabineteAberto.style.display = "block"
      
-    overlay.innerHTML = "<p id='pergunta'>A memória ___ é responsável por armazenar temporariamente os dados e as instruções que o computador utiliza para executar o sistema operacional, os programas e as tarefas <br></br> De que peça estámos falando ?</p>" 
+    overlay.innerHTML = "<p id='pergunta'>A memória ___ é responsável por armazenar temporariamente os dados e as instruções que o computador utiliza para executar o sistema operacional, os programas e as tarefas <br></br> De que peça estamos falando ?</p>" 
 
     let inputElement = document.createElement("input")
     inputElement.type = "text"
@@ -62,11 +88,31 @@ function verificarResposta(){
       divMensagem.innerHTML = "<p style='color:red'>❌ Resposta errada. Tente novamente!</p>"
 
     }
-
     
 }
 
 function fecharGabinete() {
-    monitorgabinete.style.display = "block"
+    gabinete.style.display = "block"
     gabineteAberto.style.display = "none"
+}
+
+gabinete.addEventListener("mouseenter", opacityMonitor)
+gabinete.addEventListener("mouseleave", aopacityMonitor)
+monitor.addEventListener("mouseenter", opacityGabinete)
+monitor.addEventListener("mouseleave", aopacityGabinete)
+
+function opacityGabinete() {
+    gabinete.style.filter = "opacity(50%)"
+}
+
+function opacityMonitor() {
+    monitor.style.filter = "opacity(50%)"
+}
+
+function aopacityGabinete() {
+    gabinete.style.filter = "opacity(100%)"
+}
+
+function aopacityMonitor() {
+    monitor.style.filter = "opacity(100%)"
 }

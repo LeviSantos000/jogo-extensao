@@ -4,34 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icone.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <title>Jogo</title>
 </head>
 <body>
 
     <div id="game-background">
-        <p id="pontuacao">Pontuação: 0</p>
-        <p id="tempo">Tempo: 60</p>
 
         <div id="overlay"></div>
         <div id="botao-jogar" onclick="iniciarJogo()">Jogar</div>
 
-        <p id="texto-problema">
-            
-        </p>
-        <div id="hardware-background">
-            <img src="monitor.png" alt="Monitor" id="monitor">
+        <div id="game">
 
-            <img src="./gabinete.png" alt="Gabinete" id="gabinete" onclick="abrirGabinete()">
+            <p id="tempo">Tempo: 120</p>
+            <p id="pontuacao">Pontuação: 0</p>
 
-            <img src="gabinete_aberto.png" id="gabinete-aberto" alt="Gabinete Aberto" onclick="fecharGabinete()">
+            <p id="texto-problema">...</p>
+
+            <div id="hardware-background">
+                <img src="monitor.png" alt="Monitor" id="monitor">
+
+                <img src="./gabinete.png" alt="Gabinete" id="gabinete" onclick="abrirGabinete()">
+
+                <img src="gabinete_aberto.png" id="gabinete-aberto" alt="Gabinete Aberto" onclick="fecharGabinete()">
+            </div>
+
         </div>
-        
 
     </div>
-    
+
     <div id="game-over">
         <p>Obrigado por Jogar!</p>
-        <p>Pontuação Final: </p>
+        <p id="final-score">Pontuação Final</p>
+        <p id="score">0</p>
     </div>
 
     <script src="script.js"></script>

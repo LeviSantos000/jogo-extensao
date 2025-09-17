@@ -2,17 +2,33 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Press Start 2P';
+    image-rendering: pixelated;
 }
 
 #game-background {
     width: 100vw;
     height: 100vh;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
+    background-color: rgb(150, 150, 150);
+    background-image: url(background_consoles.jpg)
+}
+
+#game {
+    width: 600px;
+    height: 600px;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px black;
 }
 
 #overlay {
-    
     display: none;
     position: absolute;
     top: 0;
@@ -43,21 +59,26 @@
 }
 
 #botao-jogar {
-    font-size: 50px;
+    font-size: 25px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 200px;
     height: 100px;
-    background-color: green;
+    background-color: rgb(109, 211, 109);
     border: 2px solid black;
     cursor: pointer;
     position: fixed;
     transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
     top: 50%;
     left: 50%;
     z-index: 2;
+}
+
+#botao-jogar:hover {
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 #tempo {
@@ -65,7 +86,7 @@
     display: none;
     font-size: 30px;
     padding: 10px;
-    background-color: lightskyblue;
+    background-color: gray;
 }
 
 #pontuacao {
@@ -73,13 +94,13 @@
     display: none;
     font-size: 30px;
     padding: 10px;
-    background-color: lightblue;
+    background-color: lightgray;
 }
 
 #texto-problema {
     display: none;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     margin: 50px 0px;
 }
 
@@ -121,7 +142,17 @@
 #game-over {
     width: 100vw;
     height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.9);
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: white;
 }
 
 #hardware-background {
@@ -129,4 +160,13 @@
     align-items: center;
     justify-content: center;
     margin: 50px 0px;
+}
+
+#final-score {
+    margin-top: 50px;
+}
+
+#score {
+    color: royalblue;
+    margin-top: 20px;
 }

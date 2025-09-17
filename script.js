@@ -1,13 +1,14 @@
 // DOM
 const gameBackground = document.querySelector("#game-background")
-const botaojogo = document.querySelector("#botao-jogar")
+const game = document.querySelector("#game")
+const botaoJogo = document.querySelector("#botao-jogar")
 const overlay = document.querySelector("#overlay")
 const monitor = document.querySelector("#monitor")
 const gabinete = document.querySelector("#gabinete")
 const gabineteAberto = document.querySelector("#gabinete-aberto")
 const pontuacao = document.querySelector("#pontuacao")
 const timer = document.querySelector("#tempo")
-const texto = document.querySelector("#texto-problema")
+const textoProblema = document.querySelector("#texto-problema")
 const gameOver = document.querySelector("#game-over")
 
 // Randomização de Problemas
@@ -22,28 +23,28 @@ var erros = [
 
 const indiceAleatorio = Math.floor(Math.random() * erros.length)
 const erroEscolhido = erros[indiceAleatorio]
-texto.textContent = erroEscolhido
+textoProblema.textContent = erroEscolhido
 
 // Funções e DOM Events
 
-let tempo = 60
+let tempo = 3
 
 function iniciarTempo() {
     if (tempo != 0) {
         tempo--
         timer.textContent = "Tempo: " + tempo
-    } else {
-        gameOver.style.display = "block"
-        gameBackground.style.display = "none"
+    }
+    else {
+        gameOver.style.display = "flex"
     }
 }
 
 function iniciarJogo() {
-    botaojogo.style.display = "none"
-    overlay.style.display = "none"
+    botaoJogo.style.display = "none"
+    game.style.display = "flex"
     gabinete.style.display = "block"
     monitor.style.display = "block"
-    texto.style.display = "block"
+    textoProblema.style.display = "block"
     pontuacao.style.display = "block"
     timer.style.display = "block"
     setInterval(iniciarTempo, 1000)
@@ -97,22 +98,22 @@ function fecharGabinete() {
 }
 
 gabinete.addEventListener("mouseenter", opacityMonitor)
-gabinete.addEventListener("mouseleave", aopacityMonitor)
+gabinete.addEventListener("mouseleave", invertOpacityMonitor)
 monitor.addEventListener("mouseenter", opacityGabinete)
-monitor.addEventListener("mouseleave", aopacityGabinete)
-
-function opacityGabinete() {
-    gabinete.style.filter = "opacity(50%)"
-}
+monitor.addEventListener("mouseleave", invertOpacityGabinete)
 
 function opacityMonitor() {
     monitor.style.filter = "opacity(50%)"
 }
 
-function aopacityGabinete() {
-    gabinete.style.filter = "opacity(100%)"
+function invertOpacityMonitor() {
+    monitor.style.filter = "opacity(100%)"
 }
 
-function aopacityMonitor() {
-    monitor.style.filter = "opacity(100%)"
+function opacityGabinete() {
+    gabinete.style.filter = "opacity(50%)"
+}
+
+function invertOpacityGabinete() {
+    gabinete.style.filter = "opacity(100%)"
 }

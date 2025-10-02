@@ -1,15 +1,17 @@
-const gameBackground = document.querySelector("#game-background");
-const game = document.querySelector("#game");
-const botaoJogo = document.querySelector("#botao-jogar");
-const overlay = document.querySelector("#overlay");
-const monitor = document.querySelector("#monitor");
-const gabinete = document.querySelector("#gabinete");
-const gabineteAberto = document.querySelector("#gabinete-aberto");
-const pontuacao = document.querySelector("#pontuacao");
-const timer = document.querySelector("#tempo");
-const textoProblema = document.querySelector("#texto-problema");
-const gameOver = document.querySelector("#game-over");
-const scoreFinal = document.querySelector("#score");
+const gameBackground = document.querySelector(".game-background");
+const game = document.querySelector(".game");
+const botaoJogo = document.querySelector(".botao-jogar");
+const overlay = document.querySelector(".overlay");
+const monitor = document.querySelector(".monitor");
+const gabinete = document.querySelector(".gabinete");
+const gabineteAberto = document.querySelector(".gabinete-aberto");
+const pontuacao = document.querySelector(".pontuacao");
+const timer = document.querySelector(".tempo");
+const textoProblema = document.querySelector(".texto-problema");
+const gameOver = document.querySelector(".game-over");
+const scoreFinal = document.querySelector(".score");
+const botaoReiniciar = document.querySelector(".botao-reiniciar")
+
 let perguntas = [
     {
         enunciado: "O Computador está reiniciando sozinho, qual o erro?",
@@ -46,55 +48,67 @@ let perguntas = [
 let tempo = 60;
 let pontuacaoAtual = 0;
 let perguntaAtual;
-let intervaloId = null;
+let intervaloId;
+
 function iniciarTempo() {
     if (tempo > 0) {
         tempo--;
         timer.textContent = "Tempo: " + tempo;
     } else {
-        // fim do jogo
-        if (intervaloId) clearInterval(intervaloId);
-        gameOver.style.display = "flex";
-        gameBackground.style.display = "none";
-        if (scoreFinal) scoreFinal.textContent = pontuacaoAtual;
-    
+        // Fim do Jogo
+        gameOver.classList.add('visivel-flex')
+        gameBackground.classList.add('oculto')
+        if (intervaloId) {
+            clearInterval(intervaloId);
+        }
+        if (scoreFinal) {
+            scoreFinal.textContent = pontuacaoAtual;
+        }
     }
 }
 
 function iniciarJogo() {
-    botaoJogo.style.display = "none";
-    game.style.display = "flex";
-    textoProblema.style.display = "block";
-    pontuacao.style.display = "block";
-    timer.style.display = "block";
+    botaoJogo.classList.add('oculto');
+    game.classList.add('visivel-flex')
+    timer.classList.add('visivel-block');
+    pontuacao.classList.add('visivel-block')
+    textoProblema.classList.add('visivel-block')
 
-    gabinete.style.display = "block";
-    monitor.style.display = "block";
-    gabineteAberto.style.display = "none"; 
+    gabinete.classList.add('visivel-block')
+    monitor.classList.add('visivel-block')
 
     pontuacao.textContent = "Pontuação: " + pontuacaoAtual;
-    textoProblema.textContent = "Clique no gabinete para ver a pergunta!";
 
-    // inicia o tempo cronometro
-    if (!intervaloId) intervaloId = setInterval(iniciarTempo, 1000);
+    intervaloId = setInterval(iniciarTempo, 1000);
 
-    iniciarRodada();
+    roletarPergunta();
 }
 
+function reiniciarJogo() {
+    tempo = 60
+    timer.textContent = "Tempo: " + tempo
+    pontuacaoAtual = 0
+    gameOver.classList.remove('visivel-flex')
+    gameBackground.classList.remove('oculto')
+    iniciarJogo()
+}
 
-function iniciarRodada() {
+function roletarPergunta() {
     perguntaAtual = perguntas[Math.floor(Math.random() * perguntas.length)];
-    textoProblema.textContent = "Clique no gabinete para ver a pergunta!";
 }
 
 function abrirGabinete() {
-    gabinete.style.display = "none";
-    monitor.style.display = "none";
-    gabineteAberto.style.display = "block";
+    gabinete.classList.remove('visivel-block')
+    monitor.classList.remove('visivel-block')
+    gabineteAberto.classList.add('visivel-block')
+    criarPergunta()
+}
 
+function criarPergunta() {
     overlay.innerHTML = "";
+    overlay.classList.add('visivel-flex')
 
-    // E nunciado
+    // Enunciado
     const p = document.createElement("p");
     p.id = "pergunta";
     p.textContent = perguntaAtual.enunciado;
@@ -103,62 +117,66 @@ function abrirGabinete() {
     // Container das alternativas em grid
     const alternativasContainer = document.createElement("div");
     alternativasContainer.id = "alternativas-container";
+    overlay.appendChild(alternativasContainer);
 
     // cria botões e add ao container
-    perguntaAtual.alternativas.forEach(alternativa => {
+    let botoes = perguntaAtual.alternativas.map(alternativa => {
         const botao = document.createElement("button");
         botao.className = "opcao";
         botao.textContent = alternativa;
-        botao.onclick = () => verificarResposta(alternativa);
+        botao.onclick = () => verificarResposta(alternativa, botoes);
         alternativasContainer.appendChild(botao);
+        return botao;
     });
-
-    overlay.appendChild(alternativasContainer);
 
     //(mensagens de acerto/erro)
     const divMensagem = document.createElement("div");
     divMensagem.id = "mensagem";
     overlay.appendChild(divMensagem);
-
-    // mostra overlay (vai respeitar CSS dele)
-    overlay.style.display = "flex";
 }
 
-// coloquei a verificação da resposta atrelada
-function verificarResposta(respostaUsuario) {
+function verificarResposta(respostaUsuario, botoes) {
     const divMensagem = document.getElementById("mensagem");
 
     if (respostaUsuario === perguntaAtual.respostaCorreta) {
-        pontuacaoAtual += 10;
+        pontuacaoAtual += 100;
         pontuacao.textContent = "Pontuação: " + pontuacaoAtual;
         divMensagem.innerHTML = "<p style='color:darkgreen; border:2px solid white; padding:10px; border-radius:5px; background-color:white;'>✅ Acertou! Parabéns.</p>";
     } else {
-        pontuacaoAtual -= 5;
-        pontuacao.textContent = "Pontuação: " + pontuacaoAtual;
+        if (pontuacaoAtual > 0) {
+            pontuacaoAtual -= 50;
+            pontuacao.textContent = "Pontuação: " + pontuacaoAtual;
+        }
         divMensagem.innerHTML = "<p style='color:red; border:2px solid white; padding:10px; border-radius:5px; background-color:white;'>❌ Errou! Resposta correta: " + perguntaAtual.respostaCorreta + "</p>";
     }
 
-    // nova rodad
+    botoes.forEach(botao => {
+        botao.classList.add('desativado')
+    });
+
+    // Roletando novas perguntas
     setTimeout(() => {
-        overlay.style.display = "none";
-        gabinete.style.display = "block";
-        monitor.style.display = "block";
-        gabineteAberto.style.display = "none";
-        iniciarRodada();
+        overlay.classList.remove('visivel-flex')
+        gabinete.classList.add('visivel-block')
+        monitor.classList.add('visivel-block')
+        gabineteAberto.classList.remove('visivel-block')
+        roletarPergunta();
     }, 2000);
 }
 
-function fecharGabinete() {
-    gabinete.style.display = "block";
-    gabineteAberto.style.display = "none";
-}
+// Botões Events
+botaoJogo.addEventListener("click", iniciarJogo)
+botaoReiniciar.addEventListener("click", reiniciarJogo)
+
+// Images Events
+gabinete.addEventListener("click", abrirGabinete);
 
 gabinete.addEventListener("mouseenter", opacityMonitor);
-gabinete.addEventListener("mouseleave", invertOpacityMonitor);
+gabinete.addEventListener("mouseleave", removeOpacityMonitor);
 monitor.addEventListener("mouseenter", opacityGabinete);
-monitor.addEventListener("mouseleave", invertOpacityGabinete);
+monitor.addEventListener("mouseleave", removeOpacityGabinete);
 
-function opacityMonitor() { monitor.style.filter = "opacity(50%)"; }
-function invertOpacityMonitor() { monitor.style.filter = "opacity(100%)"; }
-function opacityGabinete() { gabinete.style.filter = "opacity(50%)"; }
-function invertOpacityGabinete() { gabinete.style.filter = "opacity(100%)"; }
+function opacityMonitor() { monitor.classList.add('opacidade-50') }
+function removeOpacityMonitor() { monitor.classList.remove('opacidade-50') }
+function opacityGabinete() { gabinete.classList.add('opacidade-50') }
+function removeOpacityGabinete() { gabinete.classList.remove('opacidade-50') }

@@ -6,7 +6,7 @@
     image-rendering: pixelated;
 }
 
-#game-background {
+.game-background {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -17,7 +17,7 @@
     background-image: url(background_consoles.jpg)
 }
 
-#game {
+.game {
     width: 600px;
     height: 600px;
     display: none;
@@ -28,7 +28,7 @@
     box-shadow: 5px 5px 15px black;
 }
 
-#overlay {
+.overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -43,22 +43,22 @@
     font-size: 20px;
 }
 
-#overlay input,
-#overlay button {
+.overlay input,
+.overlay button {
     margin: 10px;
     padding: 10px 20px;
     font-size: 18px;
     border-radius: 8px;
     border: none;
 }
-#overlay button {
+.overlay button {
     background-color: green;
     color: white;
     cursor: pointer;
 
 }
 
-#botao-jogar {
+.botao-jogar {
     font-size: 25px;
     border-radius: 10px;
     display: flex;
@@ -77,11 +77,24 @@
     z-index: 2;
 }
 
-#botao-jogar:hover {
+.botao-jogar:hover {
     transform: translate(-50%, -50%) scale(1.1);
 }
 
-#tempo {
+.botao-reiniciar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 80px;
+    width: 500px;
+    height: 150px;
+    border-radius: 20px;
+    background-color: green;
+    cursor: pointer;
+}
+
+.tempo {
     text-align: center;
     display: none;
     font-size: 30px;
@@ -89,7 +102,7 @@
     background-color: gray;
 }
 
-#pontuacao {
+.pontuacao {
     text-align: center;
     display: none;
     font-size: 30px;
@@ -97,28 +110,28 @@
     background-color: lightgray;
 }
 
-#texto-problema {
+.texto-problema {
     display: none;
     text-align: center;
     font-size: 20px;
     margin: 50px 0px;
 }
 
-#gabinete {
+.gabinete {
     display: none;
     cursor: pointer;
     width: 250px;
     height: 250px;
 }
 
-#monitor {
+.monitor {
     display: none;
     cursor: pointer;
     width: 250px;
     height: 250px;
 }
 
-#gabinete-aberto {
+.gabinete-aberto {
     display: none;
     cursor: pointer;
     width: 250px;
@@ -139,7 +152,7 @@
     
 }
 
-#game-over {
+.game-over {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -155,20 +168,20 @@
     color: white;
 }
 
-#hardware-background {
+.hardware-background {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 50px 0px;
 }
 
-#final-score {
+.final-score {
     margin-top: 50px;
 }
 
-#score {
+.score {
     color: royalblue;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 #alternativas-container {
@@ -195,4 +208,24 @@
 #alternativas-container button:hover {
     background-color: darkgreen;
     transform: translateY(-2px);
+}
+
+.desativado {
+    pointer-events: none;
+}
+
+.oculto {
+    display: none;
+}
+
+.visivel-flex {
+    display: flex;
+}
+
+.visivel-block {
+    display: block;
+}
+
+.opacidade-50 {
+    filter: opacity(50%);
 }

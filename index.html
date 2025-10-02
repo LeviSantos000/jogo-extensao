@@ -14,41 +14,39 @@
 
 <body>
 
-    <div id="game-background">
+    <div class="game-background">
 
-        <div id="overlay"></div>
-        <div id="botao-jogar" onclick="iniciarJogo()">Jogar</div>
+        <div class="overlay"></div>
+        <div class="botao-jogar">Jogar</div>
 
-        <div id="game">
+        <div class="game">
 
-            <p id="tempo">Tempo: 120</p>
-            <p id="pontuacao">Pontuação: 0</p>
+            <p class="tempo">Tempo: 60</p>
+            <p class="pontuacao">Pontuação: 0</p>
 
-            <p id="texto-problema">...</p>
+            <p class="texto-problema">Clique no gabinete para ver a pergunta!</p>
 
-            <div id="hardware-background">
-                <img src="monitor.png" alt="Monitor" id="monitor">
+            <div class="hardware-background">
+                <img src="monitor.png" alt="Monitor" class="monitor">
 
-                <img src="./gabinete.png" alt="Gabinete" id="gabinete" onclick="abrirGabinete()">
+                <img src="./gabinete.png" alt="Gabinete" class="gabinete">
 
-                <img src="gabinete_aberto.png" id="gabinete-aberto" alt="Gabinete Aberto" onclick="fecharGabinete()">
+                <img src="gabinete_aberto.png" alt="Gabinete Aberto" class="gabinete-aberto">
             </div>
 
         </div>
 
     </div>
 
-    <div id="game-over">
+    <div class="game-over">
         <p>Obrigado por Jogar!</p>
-        <p id="final-score">Pontuação Final</p>
-        <p id="score">0</p>
+        <p class="final-score">Pontuação Final</p>
+        <p class="score">0</p>
+
+        <div class="botao-reiniciar">Reiniciar Jogo</div>
     </div>
 
     <script src="script.js"></script>
-
-    <div style="display: none;">
-        <button id="botao-reiniciar">Reiniciar Jogo</button>
-    </div>
 </body>
 
 </html>

@@ -2,7 +2,8 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Press Start 2P';
+    font-family: 'Poppins';
+    font-weight: 500;
     image-rendering: pixelated;
 }
 
@@ -13,15 +14,17 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgb(150, 150, 150);
-    background-image: url(background_consoles.jpg)
+    background-image: url(light-purple-background.jpg);
 }
 
 .game {
-    width: 600px;
-    height: 600px;
+    width: 700px;
+    height: 700px;
     display: none;
     flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     border-radius: 15px;
     overflow: hidden;
@@ -58,27 +61,27 @@
 
 }
 
+.icone-jogo {
+    margin-bottom: 50px;
+}
+
 .botao-jogar {
     font-size: 25px;
-    border-radius: 10px;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 200px;
-    height: 100px;
-    background-color: rgb(109, 211, 109);
-    border: 2px solid black;
+    height: 50px;
+    background-color: white;
+    color: rebeccapurple;
     cursor: pointer;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease;
-    top: 50%;
-    left: 50%;
+    transition: 0.3s ease;
     z-index: 2;
 }
 
 .botao-jogar:hover {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: scale(1.1);
 }
 
 .botao-reiniciar {
@@ -86,12 +89,24 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 50px;
     width: 500px;
-    height: 150px;
+    height: 100px;
     border-radius: 20px;
-    background-color: green;
+    background-color: white;
+    color: rebeccapurple;
     cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.botao-reiniciar:hover {
+    transform: scale(1.1);
+}
+
+.placar {
+    width: 300px;
+    border-radius: 20px;
+    background-color: rgb(175, 175, 175);
 }
 
 .tempo {
@@ -99,7 +114,7 @@
     display: none;
     font-size: 30px;
     padding: 10px;
-    background-color: gray;
+    color: rebeccapurple;
 }
 
 .pontuacao {
@@ -107,14 +122,16 @@
     display: none;
     font-size: 30px;
     padding: 10px;
-    background-color: lightgray;
+    color: rebeccapurple;
 }
 
 .texto-problema {
     display: none;
     text-align: center;
-    font-size: 20px;
-    margin: 50px 0px;
+    width: 550px;
+    font-size: 25px;
+    margin-top: 50px;
+    color: rebeccapurple;
 }
 
 .gabinete {
@@ -129,27 +146,6 @@
     cursor: pointer;
     width: 250px;
     height: 250px;
-}
-
-.gabinete-aberto {
-    display: none;
-    cursor: pointer;
-    width: 250px;
-    height: 250px;
-}
-
-#pergunta {
-    background-color: black;
-    border: 20px solid white;
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    max-width: 600px;
-    text-align: justify;
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    
 }
 
 .game-over {
@@ -168,6 +164,10 @@
     color: white;
 }
 
+.texto-final {
+    font-size: 100px;
+}
+
 .hardware-background {
     display: flex;
     align-items: center;
@@ -180,8 +180,8 @@
 }
 
 .score {
-    color: royalblue;
-    margin-top: 50px;
+    color: rebeccapurple;
+    margin-top: 20px;
 }
 
 #alternativas-container {
@@ -197,17 +197,16 @@
     width: 100%;
     padding: 12px;
     font-size: 16px;
-    border-radius: 8px;
+    border-radius: 25px;
     border: none;
-    background-color: green;
-    color: white;
+    background-color: rgb(202, 202, 202);
+    color: rebeccapurple;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.08s ease;
 }
 
 #alternativas-container button:hover {
-    background-color: darkgreen;
-    transform: translateY(-2px);
+    transform: scale(1.1);
 }
 
 .desativado {

@@ -11,6 +11,8 @@ const textoProblema = document.querySelector(".texto-problema");
 const gameOver = document.querySelector(".game-over");
 const scoreFinal = document.querySelector(".score");
 const botaoReiniciar = document.querySelector(".botao-reiniciar")
+const iconeJogo = document.querySelector(".icone-jogo")
+const hardwareBackground = document.querySelector(".hardware-background")
 
 let perguntas = [
     {
@@ -69,6 +71,7 @@ function iniciarTempo() {
 
 function iniciarJogo() {
     botaoJogo.classList.add('oculto');
+    iconeJogo.classList.add('oculto')
     game.classList.add('visivel-flex')
     timer.classList.add('visivel-block');
     pontuacao.classList.add('visivel-block')
@@ -98,28 +101,20 @@ function roletarPergunta() {
 }
 
 function abrirGabinete() {
-    gabinete.classList.remove('visivel-block')
     monitor.classList.remove('visivel-block')
-    gabineteAberto.classList.add('visivel-block')
     criarPergunta()
 }
 
 function criarPergunta() {
-    overlay.innerHTML = "";
-    overlay.classList.add('visivel-flex')
-
     // Enunciado
-    const p = document.createElement("p");
-    p.id = "pergunta";
-    p.textContent = perguntaAtual.enunciado;
-    overlay.appendChild(p);
+    textoProblema.textContent = perguntaAtual.enunciado
 
     // Container das alternativas em grid
     const alternativasContainer = document.createElement("div");
     alternativasContainer.id = "alternativas-container";
-    overlay.appendChild(alternativasContainer);
+    hardwareBackground.appendChild(alternativasContainer);
 
-    // cria botões e add ao container
+    // Cria as alternativas em si
     let botoes = perguntaAtual.alternativas.map(alternativa => {
         const botao = document.createElement("button");
         botao.className = "opcao";
@@ -129,7 +124,7 @@ function criarPergunta() {
         return botao;
     });
 
-    //(mensagens de acerto/erro)
+    // Mensagem de acerto ou erro das alternativas
     const divMensagem = document.createElement("div");
     divMensagem.id = "mensagem";
     overlay.appendChild(divMensagem);
@@ -137,17 +132,20 @@ function criarPergunta() {
 
 function verificarResposta(respostaUsuario, botoes) {
     const divMensagem = document.getElementById("mensagem");
+    const alternativasContainer = document.getElementById("alternativas-container")
+
+    overlay.classList.add("visivel-flex")
 
     if (respostaUsuario === perguntaAtual.respostaCorreta) {
         pontuacaoAtual += 100;
         pontuacao.textContent = "Pontuação: " + pontuacaoAtual;
-        divMensagem.innerHTML = "<p style='color:darkgreen; border:2px solid white; padding:10px; border-radius:5px; background-color:white;'>✅ Acertou! Parabéns.</p>";
+        divMensagem.innerHTML = "<p style='color:greenyellow; padding:10px; font-size:50px;'>✅ Acertou! Parabéns.</p>";
     } else {
         if (pontuacaoAtual > 0) {
             pontuacaoAtual -= 50;
             pontuacao.textContent = "Pontuação: " + pontuacaoAtual;
         }
-        divMensagem.innerHTML = "<p style='color:red; border:2px solid white; padding:10px; border-radius:5px; background-color:white;'>❌ Errou! Resposta correta: " + perguntaAtual.respostaCorreta + "</p>";
+        divMensagem.innerHTML = "<p style='color:red; padding:10px; font-size:50px;'>❌ Errou! Resposta correta: " + perguntaAtual.respostaCorreta + "</p>";
     }
 
     botoes.forEach(botao => {
@@ -156,10 +154,11 @@ function verificarResposta(respostaUsuario, botoes) {
 
     // Roletando novas perguntas
     setTimeout(() => {
+        textoProblema.textContent = "Clique no gabinete para ver a pergunta!"
+        alternativasContainer.remove()
         overlay.classList.remove('visivel-flex')
         gabinete.classList.add('visivel-block')
         monitor.classList.add('visivel-block')
-        gabineteAberto.classList.remove('visivel-block')
         roletarPergunta();
     }, 2000);
 }
